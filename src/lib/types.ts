@@ -1,0 +1,31 @@
+export type Profile = {
+  id: number;
+  full_name: string;
+  headline: string;
+  intro: string;
+  bio: string;
+  location: string;
+  learning: string[];
+  photo_url: string;
+  photo_is_demo: boolean;
+  email: string;
+  github_url: string;
+  instagram_url: string;
+  availability: string;
+};
+export type Project = {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  description: string;
+  role: string;
+  year: number;
+  tags: string[];
+  cover_url: string;
+  cover_is_concept: boolean;
+  live_url: string;
+  source_url: string;
+  status: "draft" | "published";
+  sort_order: number;
+};
