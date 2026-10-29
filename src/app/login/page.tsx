@@ -17,19 +17,19 @@ export default async function Login({
         <Link className="wordmark" href="/">
           MaCha.
         </Link>
-        <h1>Ruang pemilik.</h1>
-        <p>Kelola cerita, profil, dan karya kamu dari satu tempat.</p>
+        <h1>Owner workspace.</h1>
+        <p>Manage your stories, profile, and projects in one place.</p>
         {error === "forbidden" && (
           <p className="notice error" role="alert">
-            Akun ini belum diberi akses pemilik.
+            This account has not been granted owner access.
           </p>
         )}
         <LoginForm />
         <p className="muted">
-          Akses hanya untuk pemilik. Tidak ada pendaftaran publik.
+          Owner access only. Public registration is not available.
         </p>
         <Link className="text-link" href="/">
-          ← Kembali ke portfolio
+          ← Back to portfolio
         </Link>
       </div>
     </main>

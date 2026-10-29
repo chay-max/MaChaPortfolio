@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     template: "%s · MaCha",
   },
   description:
-    "Portfolio Maxwell Christopher Chay. Pelajar, pengembang, dan penjelajah teknologi dari Indonesia.",
+    "The portfolio of Maxwell Christopher Chay. Student, developer, and technology explorer from Indonesia.",
   robots: { index: true, follow: true },
 };
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id">
+    <html lang="en">
       <body>{children}</body>
     </html>
   );

@@ -25,14 +25,14 @@ export default async function DashboardPage() {
               MaCha.
             </Link>
             <h1>Behind the portfolio.</h1>
-            <p>Profil dan karya, dikelola dari satu tempat.</p>
+            <p>Manage your profile and work in one place.</p>
           </div>
           <div className="admin-actions">
             <Link className="button ghost" href="/" target="_blank">
-              Lihat website ↗
+              View website ↗
             </Link>
             <form action="/auth/signout" method="post">
-              <button className="ghost">Keluar</button>
+              <button className="ghost">Sign out</button>
             </form>
           </div>
         </header>

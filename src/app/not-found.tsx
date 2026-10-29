@@ -3,10 +3,12 @@ export default function NotFound() {
   return (
     <main className="status-page">
       <p className="eyebrow">404 · MaCha</p>
-      <h1>Belum ada di sini.</h1>
-      <p>Halaman ini tidak ditemukan atau proyek belum dipublikasikan.</p>
+      <h1>Nothing here yet.</h1>
+      <p>
+        This page could not be found, or the project has not been published.
+      </p>
       <Link className="button dark" href="/">
-        Kembali ke portfolio
+        Back to portfolio
       </Link>
     </main>
   );

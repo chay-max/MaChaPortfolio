@@ -79,7 +79,7 @@ function Upload({
       setUrl(data.url);
       setDemo(false);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Upload gagal.");
+      setError(e instanceof Error ? e.message : "Upload failed.");
     } finally {
       setBusy(false);
     }
@@ -95,7 +95,7 @@ function Upload({
         required
       />
       <label htmlFor={`${name}-file`}>
-        Upload JPEG, PNG, atau WebP · maksimal 5 MB
+        Upload JPEG, PNG, or WebP · up to 5 MB
       </label>
       <input
         id={`${name}-file`}
@@ -106,14 +106,14 @@ function Upload({
           const file = e.target.files?.[0];
           if (file) {
             if (file.size > 5 * 1024 * 1024) {
-              setError("Ukuran maksimal 5 MB.");
+              setError("Maximum file size is 5 MB.");
               return;
             }
             void upload(file);
           }
         }}
       />
-      {busy && <span role="status">Mengunggah…</span>}
+      {busy && <span role="status">Uploading…</span>}
       {error && (
         <span className="notice error" role="alert">
           {error}
@@ -126,7 +126,7 @@ function Upload({
           checked={isDemo}
           onChange={(e) => setDemo(e.target.checked)}
         />
-        Tampilkan keterangan gambar contoh / konsep
+        Show placeholder / concept image label
       </label>
       <input type="hidden" name="uploading" value={busy ? "yes" : "no"} />
     </div>
@@ -154,7 +154,7 @@ export default function Dashboard({
   const router = useRouter();
   async function profileAction(f: FormData) {
     if (f.get("uploading") === "yes") {
-      setMessage({ error: "Tunggu upload selesai." });
+      setMessage({ error: "Please wait for the upload to finish." });
       return;
     }
     start(async () => {
@@ -179,7 +179,7 @@ export default function Dashboard({
   }
   async function projectAction(f: FormData) {
     if (f.get("uploading") === "yes") {
-      setMessage({ error: "Tunggu upload selesai." });
+      setMessage({ error: "Please wait for the upload to finish." });
       return;
     }
     start(async () => {
@@ -215,7 +215,7 @@ export default function Dashboard({
             setMessage({});
           }}
         >
-          Profil & kontak
+          Profile & contact
         </button>
         <button
           className={`button ${tab === "projects" ? "matcha" : "ghost"}`}
@@ -224,7 +224,7 @@ export default function Dashboard({
             setMessage({});
           }}
         >
-          Proyek ({projects.length})
+          Projects ({projects.length})
         </button>
       </div>
       <div aria-live="polite">
@@ -236,10 +236,10 @@ export default function Dashboard({
       </div>
       {tab === "profile" ? (
         <form action={profileAction} className="admin-panel">
-          <h2>Orang di balik MaCha.</h2>
+          <h2>The person behind MaCha.</h2>
           <div className="admin-grid">
             <Field
-              label="Nama lengkap"
+              label="Full name"
               name="full_name"
               value={p.full_name}
               required
@@ -250,26 +250,30 @@ export default function Dashboard({
               value={p.headline}
               required
             />
-            <Field label="Kalimat pembuka" name="intro" value={p.intro} area />
-            <Field label="Biodata" name="bio" value={p.bio} area />
-            <Field label="Lokasi umum" name="location" value={p.location} />
+            <Field label="Introduction" name="intro" value={p.intro} area />
+            <Field label="Biography" name="bio" value={p.bio} area />
             <Field
-              label="Ketersediaan / catatan"
+              label="General location"
+              name="location"
+              value={p.location}
+            />
+            <Field
+              label="Availability / note"
               name="availability"
               value={p.availability}
             />
             <Field
-              label="Sedang dipelajari"
+              label="Currently learning"
               name="learning"
               value={p.learning.join(", ")}
-              hint="Pisahkan dengan koma."
+              hint="Separate with commas."
             />
             <Field
-              label="Email publik"
+              label="Public email"
               name="email"
               value={p.email}
               type="email"
-              hint="Kosongkan jika tidak ingin ditampilkan."
+              hint="Leave blank to hide this field."
             />
             <Field label="GitHub URL" name="github_url" value={p.github_url} />
             <Field
@@ -278,7 +282,7 @@ export default function Dashboard({
               value={p.instagram_url}
             />
             <Upload
-              label="Foto profil"
+              label="Profile photo"
               name="photo_url"
               initial={p.photo_url}
               demoName="photo_is_demo"
@@ -286,13 +290,13 @@ export default function Dashboard({
             />
           </div>
           <button className="button matcha" disabled={pending}>
-            {pending ? "Menyimpan…" : "Simpan profil"}
+            {pending ? "Saving…" : "Save profile"}
           </button>
         </form>
       ) : (
         <section className="admin-panel">
           <div className="admin-header">
-            <h2>Proyek & ceritanya.</h2>
+            <h2>Projects & their stories.</h2>
             <button
               className="button matcha"
               onClick={() => {
@@ -300,14 +304,14 @@ export default function Dashboard({
                 setMessage({});
               }}
             >
-              Tambah proyek
+              Add project
             </button>
           </div>
           {editing === undefined ? (
             <>
               {projects.length === 0 && (
                 <p className="muted">
-                  Belum ada proyek. Tambahkan karya pertamamu.
+                  No projects yet. Add your first piece of work.
                 </p>
               )}
               {projects.map((project) => (
@@ -315,8 +319,8 @@ export default function Dashboard({
                   <div>
                     <h3>{project.title}</h3>
                     <p>
-                      {project.status === "published" ? "Publik" : "Draft"} ·
-                      /projects/{project.slug} · urutan {project.sort_order}
+                      {project.status === "published" ? "Published" : "Draft"} ·
+                      /projects/{project.slug} · order {project.sort_order}
                     </p>
                   </div>
                   <div className="admin-actions">
@@ -340,7 +344,7 @@ export default function Dashboard({
                           })
                         }
                       >
-                        Jadikan draft
+                        Move to drafts
                       </button>
                     )}
                   </div>
@@ -351,7 +355,7 @@ export default function Dashboard({
             <form action={projectAction} key={editing?.id || "new"}>
               <div className="admin-grid">
                 <Field
-                  label="Judul"
+                  label="Title"
                   name="title"
                   value={editing?.title}
                   required
@@ -361,47 +365,47 @@ export default function Dashboard({
                   name="slug"
                   value={editing?.slug}
                   required
-                  hint="Huruf kecil, angka, dan tanda hubung."
+                  hint="Use lowercase letters, numbers, and hyphens."
                 />
                 <Field
-                  label="Ringkasan"
+                  label="Summary"
                   name="summary"
                   value={editing?.summary}
                   area
                   required
                 />
                 <Field
-                  label="Cerita / proses / hasil"
+                  label="Story / process / outcome"
                   name="description"
                   value={editing?.description}
                   area
                 />
-                <Field label="Peran" name="role" value={editing?.role} />
+                <Field label="Role" name="role" value={editing?.role} />
                 <Field
-                  label="Tahun"
+                  label="Year"
                   name="year"
                   value={editing?.year || 2026}
                   type="number"
                 />
                 <Field
-                  label="Teknologi"
+                  label="Technologies"
                   name="tags"
                   value={editing?.tags.join(", ")}
-                  hint="Pisahkan dengan koma."
+                  hint="Separate with commas."
                 />
                 <Field
-                  label="Urutan"
+                  label="Display order"
                   name="sort_order"
                   value={editing?.sort_order ?? projects.length}
                   type="number"
                 />
                 <Field
-                  label="URL website (opsional)"
+                  label="Website URL (optional)"
                   name="live_url"
                   value={editing?.live_url}
                 />
                 <Field
-                  label="URL source (opsional)"
+                  label="Source URL (optional)"
                   name="source_url"
                   value={editing?.source_url}
                 />
@@ -412,12 +416,12 @@ export default function Dashboard({
                     name="status"
                     defaultValue={editing?.status || "draft"}
                   >
-                    <option value="draft">Draft · hanya pemilik</option>
-                    <option value="published">Publik · semua pengunjung</option>
+                    <option value="draft">Draft · owner only</option>
+                    <option value="published">Published · all visitors</option>
                   </select>
                 </div>
                 <Upload
-                  label="Cover proyek"
+                  label="Project cover"
                   name="cover_url"
                   initial={editing?.cover_url || "/images/mbg-concept.png"}
                   demoName="cover_is_concept"
@@ -426,14 +430,14 @@ export default function Dashboard({
               </div>
               <div className="admin-actions">
                 <button className="button matcha" disabled={pending}>
-                  {pending ? "Menyimpan…" : "Simpan proyek"}
+                  {pending ? "Saving…" : "Save project"}
                 </button>
                 <button
                   type="button"
                   className="button ghost"
                   onClick={() => setEditing(undefined)}
                 >
-                  Batal
+                  Cancel
                 </button>
               </div>
             </form>

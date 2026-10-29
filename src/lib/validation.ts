@@ -3,11 +3,8 @@ export const safeUrl = z
   .string()
   .trim()
   .max(2048)
-  .refine(
-    (v) => !v || /^https:\/\//i.test(v),
-    "Gunakan URL https:// yang valid.",
-  )
-  .refine((v) => !v || URL.canParse(v), "URL tidak valid.");
+  .refine((v) => !v || /^https:\/\//i.test(v), "Enter a valid https:// URL.")
+  .refine((v) => !v || URL.canParse(v), "Invalid URL.");
 export const imageUrl = z
   .string()
   .trim()
@@ -16,7 +13,7 @@ export const imageUrl = z
     (v) =>
       /^\/images\/[a-zA-Z0-9_.-]+$/.test(v) ||
       (/^https:\/\//i.test(v) && URL.canParse(v)),
-    "Gunakan URL gambar HTTPS atau /images/nama-file.",
+    "Use an HTTPS image URL or /images/file-name.",
   );
 export const profileSchema = z.object({
   full_name: z.string().trim().min(3).max(100),

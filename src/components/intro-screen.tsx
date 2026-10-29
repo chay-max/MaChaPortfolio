@@ -29,7 +29,7 @@ export default function IntroScreen() {
   if (phase === "hidden") return null;
   return (
     <div className={`intro-screen intro-screen--${phase}`}>
-      <div className="intro-brand" role="status" aria-label="Membuka MaCha">
+      <div className="intro-brand" role="status" aria-label="Opening MaCha">
         <span aria-hidden="true">
           Ma<span className="intro-cha">Cha</span>
           <span className="intro-dot">.</span>
@@ -37,7 +37,7 @@ export default function IntroScreen() {
         <span className="intro-name">Maxwell Christopher Chay</span>
       </div>
       <button className="intro-skip" onClick={() => setPhase("hidden")}>
-        Lewati intro
+        Skip intro
       </button>
     </div>
   );

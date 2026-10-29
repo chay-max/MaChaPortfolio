@@ -10,7 +10,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const { projects } = await getPublicContent();
-  return { title: projects.find((p) => p.slug === slug)?.title || "Proyek" };
+  return { title: projects.find((p) => p.slug === slug)?.title || "Projects" };
 }
 export default async function ProjectPage({
   params,
@@ -24,7 +24,7 @@ export default async function ProjectPage({
   return (
     <main className="project-detail shell">
       <Link className="text-link" href="/#projects">
-        ← Kembali ke portfolio
+        ← Back to portfolio
       </Link>
       <p className="eyebrow">
         {p.year} / {p.role}
@@ -46,7 +46,8 @@ export default async function ProjectPage({
         />
         {p.cover_is_concept && (
           <figcaption>
-            Ilustrasi konsep antarmuka; bukan dokumentasi penggunaan publik.
+            Concept interface illustration; not a screenshot of a public
+            deployment.
           </figcaption>
         )}
       </figure>
@@ -63,7 +64,7 @@ export default async function ProjectPage({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Buka proyek ↗
+            View project ↗
           </a>
         )}
         {p.source_url && (

@@ -6,14 +6,14 @@ export async function login(_previous: { error: string }, form: FormData) {
   const email = String(form.get("email") || "").trim();
   const password = String(form.get("password") || "");
   if (!email || !password || email.length > 254 || password.length > 512)
-    return { error: "Isi email dan kata sandi dengan benar." };
+    return { error: "Enter a valid email address and password." };
   const db = await createClient();
   const { data, error } = await db.auth.signInWithPassword({ email, password });
   if (error || !data.user)
-    return { error: "Email atau kata sandi tidak cocok. Coba lagi." };
+    return { error: "Incorrect email or password. Please try again." };
   if (!allowedOwner(data.user.id, process.env.OWNER_USER_ID)) {
     await db.auth.signOut();
-    return { error: "Akun ini tidak memiliki akses pemilik." };
+    return { error: "This account does not have owner access." };
   }
   redirect("/dashboard");
 }

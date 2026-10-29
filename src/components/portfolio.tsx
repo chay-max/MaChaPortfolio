@@ -77,15 +77,15 @@ export default function Portfolio({
   return (
     <>
       <a className="skip-link" href="#main">
-        Lewati ke konten
+        Skip to content
       </a>
       <div className="light-surface">
         <header className="site-header shell">
-          <Link className="wordmark" href="/" aria-label="MaCha beranda">
+          <Link className="wordmark" href="/" aria-label="MaCha home">
             MaCha<span>.</span>
           </Link>
           <nav
-            aria-label="Navigasi utama"
+            aria-label="Main navigation"
             className={menu ? "nav open" : "nav"}
           >
             <a href="#about" onClick={() => setMenu(false)}>
@@ -102,7 +102,7 @@ export default function Portfolio({
             className="menu-button"
             onClick={() => setMenu(!menu)}
             aria-expanded={menu}
-            aria-label={menu ? "Tutup navigasi" : "Buka navigasi"}
+            aria-label={menu ? "Close navigation" : "Open navigation"}
           >
             {menu ? <X size={24} /> : <List size={24} />}
           </button>
@@ -130,10 +130,10 @@ export default function Portfolio({
               <p className="intro">{p.intro}</p>
               <div className="hero-actions">
                 <a className="button dark" href="#projects">
-                  Lihat karya <ArrowRight size={21} />
+                  View my work <ArrowRight size={21} />
                 </a>
                 <a className="button outline" href="#about">
-                  Kenalan lebih dekat
+                  Get to know me
                 </a>
               </div>
               <p className="hero-footnote">
@@ -168,8 +168,8 @@ export default function Portfolio({
                   src={p.photo_url}
                   alt={
                     p.photo_is_demo
-                      ? "Ilustrasi foto sementara; bukan foto Maxwell"
-                      : `Foto ${p.full_name}`
+                      ? "Placeholder portrait; not a photo of Maxwell"
+                      : `Photo of ${p.full_name}`
                   }
                   fill
                   priority
@@ -178,7 +178,7 @@ export default function Portfolio({
                 />
                 <figcaption>
                   {p.photo_is_demo
-                    ? "Foto sementara · akan diganti"
+                    ? "Placeholder photo · to be replaced"
                     : p.location}
                   <span>01 / PROFILE</span>
                 </figcaption>
@@ -200,14 +200,14 @@ export default function Portfolio({
           <section
             id="about"
             className="bio-grid shell"
-            aria-label="Tentang Maxwell"
+            aria-label="About Maxwell"
           >
             <Reveal className="glass bio-card reveal">
               <div className="icon-circle">
                 <User size={25} />
               </div>
               <div>
-                <h2>Tentang saya</h2>
+                <h2>About me</h2>
                 <p>{p.bio}</p>
                 <span className="card-meta">{p.location}</span>
               </div>
@@ -217,7 +217,7 @@ export default function Portfolio({
                 <BookOpen size={25} />
               </div>
               <div>
-                <h2>Yang saya pelajari</h2>
+                <h2>What I’m learning</h2>
                 <ul className="learning-list">
                   {p.learning.map((s) => (
                     <li key={s}>{s}</li>
@@ -230,15 +230,15 @@ export default function Portfolio({
                 <LinkSimple size={25} />
               </div>
               <div>
-                <h2>Mari terhubung</h2>
-                <p>Ide baru selalu dimulai dari percakapan.</p>
+                <h2>Let’s connect</h2>
+                <p>New ideas begin with a conversation.</p>
                 <a
                   className="text-link"
                   href={p.github_url || "#contact"}
                   target={p.github_url ? "_blank" : undefined}
                   rel="noopener noreferrer"
                 >
-                  {p.github_url ? "GitHub / chay-max" : "Hubungi saya"}{" "}
+                  {p.github_url ? "GitHub / chay-max" : "Get in touch"}{" "}
                   <ArrowUpRight size={17} />
                 </a>
               </div>
@@ -252,16 +252,16 @@ export default function Portfolio({
             <div>
               <p className="eyebrow">BUILT WITH CURIOSITY</p>
               <h2>
-                Pilihan karya<span>.</span>
+                Selected work<span>.</span>
               </h2>
             </div>
             <span className="section-note">
-              Ide, proses, dan hal yang saya bangun.
+              Ideas, processes, and things I’ve built.
             </span>
           </Reveal>
           {projects.length === 0 ? (
             <p className="empty-state">
-              Karya baru sedang disiapkan. Nantikan ceritanya di sini.
+              New work is on the way. Check back for the story.
             </p>
           ) : (
             projects.map((project, i) => (
@@ -283,19 +283,19 @@ export default function Portfolio({
                       ))}
                     </div>
                     <span className="project-link">
-                      Lihat cerita proyek <ArrowUpRight size={20} />
+                      Explore the project <ArrowUpRight size={20} />
                     </span>
                   </div>
                   <div className="project-image">
                     <Image
                       src={project.cover_url}
-                      alt={`Ilustrasi ${project.title}`}
+                      alt={`Illustration of ${project.title}`}
                       fill
                       sizes="(max-width: 700px) 90vw, 50vw"
                       unoptimized={!project.cover_url.startsWith("/")}
                     />
                     {project.cover_is_concept && (
-                      <span className="image-note">Ilustrasi konsep</span>
+                      <span className="image-note">Concept illustration</span>
                     )}
                   </div>
                 </Link>
@@ -307,16 +307,16 @@ export default function Portfolio({
           <Reveal className="reveal">
             <p className="eyebrow">A CONVERSATION IS A GOOD START</p>
             <h2>
-              Ada ide?
+              Have an idea?
               <br />
-              <em>Mari bicarakan.</em>
+              <em>Let’s talk.</em>
             </h2>
-            <p>Untuk proyek, kolaborasi, atau sekadar bertukar cerita.</p>
+            <p>For projects, collaborations, or simply exchanging ideas.</p>
             <div className="contact-links">
               {p.email && (
                 <a className="button matcha" href={`mailto:${p.email}`}>
                   <Envelope size={20} />
-                  Kirim email <ArrowUpRight size={18} />
+                  Send an email <ArrowUpRight size={18} />
                 </a>
               )}
               {p.github_url && (
@@ -352,7 +352,7 @@ export default function Portfolio({
             <b>MaCha</b> — Maxwell Christopher Chay
           </p>
           <span>Build. Learn. Repeat.</span>
-          <a href="#main">Kembali ke atas ↑</a>
+          <a href="#main">Back to top ↑</a>
         </footer>
       </div>
     </>

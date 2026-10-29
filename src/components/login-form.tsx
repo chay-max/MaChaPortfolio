@@ -6,7 +6,7 @@ export default function LoginForm() {
   return (
     <form action={action}>
       <div className="field">
-        <label htmlFor="email">Email pemilik</label>
+        <label htmlFor="email">Owner email</label>
         <input
           id="email"
           name="email"
@@ -17,7 +17,7 @@ export default function LoginForm() {
         />
       </div>
       <div className="field">
-        <label htmlFor="password">Kata sandi</label>
+        <label htmlFor="password">Password</label>
         <input
           id="password"
           name="password"
@@ -33,7 +33,7 @@ export default function LoginForm() {
         </p>
       )}
       <button className="button matcha" disabled={pending}>
-        {pending ? "Memeriksa…" : "Masuk ke dashboard"}
+        {pending ? "Checking…" : "Sign in to dashboard"}
       </button>
     </form>
   );

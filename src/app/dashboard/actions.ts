@@ -14,9 +14,12 @@ export async function saveProfile(payload: unknown) {
     };
   const { error } = await db.from("profile").update(parsed.data).eq("id", 1);
   if (error)
-    return { error: "Profil gagal disimpan. Periksa koneksi lalu coba lagi." };
+    return {
+      error:
+        "Could not save your profile. Check your connection and try again.",
+    };
   revalidatePath("/");
-  return { success: "Profil berhasil disimpan." };
+  return { success: "Profile saved successfully." };
 }
 export async function saveProject(id: string | null, payload: unknown) {
   const { db } = await requireOwner();
@@ -28,7 +31,7 @@ export async function saveProject(id: string | null, payload: unknown) {
         .join("\n"),
     };
   if (id && !z.uuid().safeParse(id).success)
-    return { error: "ID proyek tidak valid." };
+    return { error: "Invalid project ID." };
   const result = id
     ? await db.from("projects").update(parsed.data).eq("id", id)
     : await db.from("projects").insert(parsed.data);
@@ -36,25 +39,24 @@ export async function saveProject(id: string | null, payload: unknown) {
     return {
       error:
         result.error.code === "23505"
-          ? "Slug sudah dipakai proyek lain."
-          : "Proyek gagal disimpan. Periksa koneksi dan coba lagi.",
+          ? "Another project already uses this slug."
+          : "Could not save the project. Check your connection and try again.",
     };
   revalidatePath("/");
   revalidatePath("/dashboard");
   revalidatePath(`/projects/${parsed.data.slug}`);
-  return { success: "Proyek berhasil disimpan." };
+  return { success: "Project saved successfully." };
 }
 export async function archiveProject(id: string) {
   const { db } = await requireOwner();
-  if (!z.uuid().safeParse(id).success)
-    return { error: "ID proyek tidak valid." };
+  if (!z.uuid().safeParse(id).success) return { error: "Invalid project ID." };
   const { error } = await db
     .from("projects")
     .update({ status: "draft" })
     .eq("id", id);
-  if (error) return { error: "Proyek gagal diarsipkan." };
+  if (error) return { error: "Could not archive the project." };
   revalidatePath("/");
   revalidatePath("/dashboard");
   revalidatePath("/projects/[slug]", "page");
-  return { success: "Proyek dipindahkan ke draft." };
+  return { success: "Project moved to drafts." };
 }
