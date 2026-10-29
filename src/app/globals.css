@@ -1116,3 +1116,98 @@ select:focus-visible {
     transform: none !important;
   }
 }
+
+/* Session-only MaCha intro. Content remains usable while the brand appears. */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: #141a14;
+  color: #b4c594;
+  pointer-events: none;
+  animation: intro-surface-in 180ms ease-out both;
+}
+.intro-brand {
+  text-align: center;
+  padding: 24px;
+}
+.intro-brand > span:first-child {
+  display: block;
+  font:
+    400 clamp(68px, 15vw, 126px) / 1.1 "DM Serif",
+    Georgia,
+    serif;
+  letter-spacing: -0.055em;
+  animation: intro-word-in 850ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.intro-cha {
+  color: #e9ede3;
+}
+.intro-dot {
+  color: #8ca770;
+}
+.intro-name {
+  display: block;
+  margin-top: 19px;
+  color: #b1bda7;
+  font-size: clamp(10px, 2.8vw, 12px);
+  letter-spacing: 0.15em;
+  animation: intro-caption-in 700ms 200ms both;
+}
+.intro-skip {
+  position: absolute;
+  bottom: max(30px, env(safe-area-inset-bottom));
+  background: transparent;
+  border: 1px solid #b4c59444;
+  border-radius: 30px;
+  padding: 10px 18px;
+  color: #c6d3bc;
+  font-size: 12px;
+  pointer-events: auto;
+}
+.intro-screen--exit {
+  animation: intro-surface-out 500ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+@keyframes intro-surface-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes intro-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+    filter: blur(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+@keyframes intro-caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes intro-surface-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-screen {
+    display: none;
+  }
+}
